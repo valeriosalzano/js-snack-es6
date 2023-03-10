@@ -70,6 +70,53 @@ Scrivere una funzione che accetti tre argomenti, un array e due numeri (a più p
 La funzione ritornerà un nuovo array con i valori che hanno la posizione compresa tra i due numeri.
 */
 
+const snack3ContainerDom = document.getElementById('snack3-container');
+
+// mi creo un'array che illustra un tragitto con un numero random di fermate
+travelPoints = [];
+randomLength = randomNumber(3,100);
+
+// nell'array inserisco le fermate che avranno un ordine numerico e una distanza dal punto di partenza
+for (let i=0; i<randomLength; i++){
+    let newPoint = {};
+    newPoint.name = i==0? 'Punto di partenza':('Tappa '+i);
+    switch (i){
+        case 0: newPoint.distance = 0; 
+        break;
+
+        default : 
+        newPoint.distance = randomNumber(1,10) + travelPoints[i-1].distance;
+
+    }
+    travelPoints.push(newPoint);
+}
+
+// creo una funzione che mi restituisca i punti e la distanza tra due punti scelti "a" e "b" 
+
+// scelgo a e b a caso rispettando il criterio di ordine
+let a;
+let b;
+do{
+    a = randomNumber(0,travelPoints.length-1);
+    b = randomNumber(1,travelPoints.length);
+} while (a >= b)
+
+printP(snack3ContainerDom,`Abbiamo scelto per te il percorso dal punto ${a} al punto ${b}. \n Viaggerai attraverso le seguenti tappe:`)
+
+let pointsArray = calcDistance(a,b,travelPoints);
+
+printList(snack3ContainerDom,...pointsArray);
+
+printP(snack3ContainerDom,`La distanza totale percorsa è di ${travelPoints[b].distance - travelPoints[a].distance} km!`)
+
+function calcDistance (a,b,array){
+    let pointsArray = [];
+    pointsArray = array.filter((point,index) => index>=a && index<=b);
+    let newArray = [];
+    newArray = pointsArray.map(point => point.name);
+    return newArray;
+}
+
 
 
 // LISTA FUNZIONI
