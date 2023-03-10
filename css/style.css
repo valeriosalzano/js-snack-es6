@@ -6,6 +6,7 @@
 
 ul {
     display: inline-block;
+    text-align: left;
 }
 
 /* google font open sans */
