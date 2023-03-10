@@ -113,7 +113,7 @@ function calcDistance (a,b,array){
     let pointsArray = [];
     pointsArray = array.filter((point,index) => index>=a && index<=b);
     let newArray = [];
-    newArray = pointsArray.map(point => point.name);
+    newArray = pointsArray.map(point => `${point.name} . Dal punto 0 dista: ${point.distance} km.`);
     return newArray;
 }
 
